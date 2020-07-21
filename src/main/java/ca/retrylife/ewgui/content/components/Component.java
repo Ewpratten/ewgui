@@ -8,6 +8,13 @@ import ca.retrylife.ewgui.rendering.Renderable;
  */
 public abstract class Component implements Renderable {
 
+    /**
+     * The state of the component
+     */
+    public enum ComponentState {
+        NORMAL, FOCUSED, PRESSED, DISABLED
+    }
+
     // Component size
     private Size<Integer> size = new Size<Integer>(0,0);
 
