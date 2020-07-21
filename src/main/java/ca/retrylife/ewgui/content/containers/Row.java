@@ -35,18 +35,20 @@ public class Row extends Component {
         int currentWidth = (int) origin.getX() + PADDING_PX;
         int maxHeight = getMinHeight();
 
-        for (Component component : components) {
-            // Get the component's height
-            int componentHeight = component.getMinHeight();
+        synchronized (gc) {
+            for (Component component : components) {
+                // Get the component's height
+                int componentHeight = component.getMinHeight();
 
-            // Determine how much vertical padding to provide
-            int topPadding = Math.max(0, (maxHeight - componentHeight) / 2);
+                // Determine how much vertical padding to provide
+                int topPadding = Math.max(0, (maxHeight - componentHeight) / 2);
 
-            // Render the component at it's place
-            component.render(new Point(currentWidth, (int)origin.getY() + topPadding), gc);
+                // Render the component at it's place
+                component.render(new Point(currentWidth, (int) origin.getY() + topPadding), gc);
 
-            // Add to the current width
-            currentWidth += component.getSize().getWidth() + PADDING_PX;
+                // Add to the current width
+                currentWidth += component.getSize().getWidth() + PADDING_PX;
+            }
         }
     }
 
@@ -56,8 +58,9 @@ public class Row extends Component {
 
         // Determine the component sizes
         int totalSize = size.getWidth() - (PADDING_PX * (components.length + 1));
-        Integer widthPerComponent = totalSize / components.length;
-        Integer heightPerComponent = (size.getHeight() != Size.AUTO)? size.getHeight() - (PADDING_PX * 2) : getMinHeight();
+        Integer widthPerComponent = totalSize / Math.max(1, components.length);
+        Integer heightPerComponent = (size.getHeight() != Size.AUTO) ? size.getHeight() - (PADDING_PX * 2)
+                : getMinHeight();
 
         for (Component component : components) {
             // Set size

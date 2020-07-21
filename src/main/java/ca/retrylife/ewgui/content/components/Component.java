@@ -9,7 +9,7 @@ import ca.retrylife.ewgui.rendering.Renderable;
 public abstract class Component implements Renderable {
 
     // Component size
-    private Size<Integer> size;
+    private Size<Integer> size = new Size<Integer>(0,0);
 
     // Component enabled
     private boolean enabled;

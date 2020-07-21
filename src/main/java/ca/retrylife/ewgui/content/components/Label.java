@@ -53,8 +53,8 @@ public class Label extends Component {
         int maxHeight = (maxSize.getHeight() != null) ? maxSize.getHeight() : getMinHeight();
 
         // Determine string X/Y
-        int x = (int) origin.getX() + Math.min(0, ((maxWidth - width) / 2));
-        int y = (int) origin.getY() + Math.min(0, ((maxHeight - height) / 2)) + height;
+        int x = (int) origin.getX() + Math.max(0, ((maxWidth - width) / 2));
+        int y = (int) origin.getY() + Math.max(0, ((maxHeight - height) / 2)) + height;
 
         // Render text
         gc.drawString(this.text.getText(), x, y);
