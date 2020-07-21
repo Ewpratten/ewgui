@@ -7,6 +7,7 @@ import java.awt.geom.Rectangle2D;
 
 import ca.retrylife.ewgui.datatypes.Size;
 import ca.retrylife.ewgui.datatypes.Text;
+import ca.retrylife.ewgui.theming.Style;
 
 /**
  * Labels are printable text
@@ -35,7 +36,7 @@ public class Label extends Component {
     }
 
     @Override
-    public void render(Point origin, Graphics2D gc) {
+    public void render(Point origin, Graphics2D gc, Style style) {
 
         // TODO: Handle font setting
 
@@ -57,6 +58,7 @@ public class Label extends Component {
         int y = (int) origin.getY() + Math.max(0, ((maxHeight - height) / 2)) + height;
 
         // Render text
+        gc.setColor((getEnabled())? style.getNormalColor() : style.getDisabledColor());
         gc.drawString(this.text.getText(), x, y);
 
     }

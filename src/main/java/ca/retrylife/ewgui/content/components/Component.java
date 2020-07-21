@@ -12,7 +12,7 @@ public abstract class Component implements Renderable {
     private Size<Integer> size = new Size<Integer>(0,0);
 
     // Component enabled
-    private boolean enabled;
+    private boolean enabled = true;
 
     public Component() {
 

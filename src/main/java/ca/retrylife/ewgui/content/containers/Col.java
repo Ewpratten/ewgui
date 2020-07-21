@@ -5,6 +5,7 @@ import java.awt.Point;
 
 import ca.retrylife.ewgui.content.components.Component;
 import ca.retrylife.ewgui.datatypes.Size;
+import ca.retrylife.ewgui.theming.Style;
 
 public class Col extends Component {
     // Containing components
@@ -26,7 +27,7 @@ public class Col extends Component {
     }
 
     @Override
-    public void render(Point origin, Graphics2D gc) {
+    public void render(Point origin, Graphics2D gc, Style style) {
 
         int currentHeight = (int) origin.getY() + PADDING_PX;
 
@@ -34,7 +35,7 @@ public class Col extends Component {
             for (Component component : components) {
 
                 // Render the component at it's place
-                component.render(new Point((int)origin.getX(), currentHeight), gc);
+                component.render(new Point((int)origin.getX(), currentHeight), gc, style);
 
                 // Add to the current width
                 currentHeight += component.getSize().getHeight() + PADDING_PX;

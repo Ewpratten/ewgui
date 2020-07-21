@@ -13,6 +13,7 @@ import java.awt.Dimension;
 import ca.retrylife.ewgui.content.components.Component;
 import ca.retrylife.ewgui.content.containers.Row;
 import ca.retrylife.ewgui.datatypes.Size;
+import ca.retrylife.ewgui.theming.Style;
 
 public class Window extends JComponent {
     private static final long serialVersionUID = -3278610621086270623L;
@@ -24,11 +25,14 @@ public class Window extends JComponent {
     private Component navbar;
     private Component content;
 
+    // Window style
+    private Style style;
+
     public enum ConfigurationFlags {
         EXIT_ON_CLOSE, NO_RESIZE, SPAWN_CENTRE
     }
 
-    protected Window(String title, Component navbar, Component content, ConfigurationFlags... flags) {
+    protected Window(String title, Component navbar, Component content, Style style, ConfigurationFlags... flags) {
 
         // Configure frame
         this.frame = new JFrame(title);
@@ -55,6 +59,9 @@ public class Window extends JComponent {
         // Set containers
         this.navbar = navbar;
         this.content = content;
+
+        // Set theme
+        this.style = style;
 
         // Resize handler
         frame.addComponentListener(new ComponentAdapter() {
@@ -89,14 +96,17 @@ public class Window extends JComponent {
         int currentHeight = 0;
 
         synchronized (gc) {
+            // Fill the BG
+            gc.setBackground(style.getBackgroundColor());
+
             // Render navbar
-            navbar.render(new Point(0, currentHeight), gc);
+            navbar.render(new Point(0, currentHeight), gc, style);
 
             // Add navbar height to current
             currentHeight += navbar.getMinHeight();
 
             // Render content
-            content.render(new Point(0, currentHeight), gc);
+            content.render(new Point(0, currentHeight), gc, style);
         }
 
         try{

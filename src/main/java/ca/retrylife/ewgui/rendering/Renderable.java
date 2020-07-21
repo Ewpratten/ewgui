@@ -3,6 +3,7 @@ package ca.retrylife.ewgui.rendering;
 import java.awt.Point;
 
 import ca.retrylife.ewgui.datatypes.UserInput;
+import ca.retrylife.ewgui.theming.Style;
 
 import java.awt.Graphics2D;
 
@@ -15,7 +16,7 @@ public interface Renderable {
      *               drawing here.
      * @param gc     Graphics
      */
-    public void render(Point origin, Graphics2D gc);
+    public void render(Point origin, Graphics2D gc, Style style);
 
     /**
      * Accept user input

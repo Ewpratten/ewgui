@@ -5,6 +5,7 @@ import java.awt.Point;
 
 import ca.retrylife.ewgui.content.components.Component;
 import ca.retrylife.ewgui.datatypes.Size;
+import ca.retrylife.ewgui.theming.Style;
 
 /**
  * A row of components
@@ -30,7 +31,7 @@ public class Row extends Component {
     }
 
     @Override
-    public void render(Point origin, Graphics2D gc) {
+    public void render(Point origin, Graphics2D gc, Style style) {
 
         int currentWidth = (int) origin.getX() + PADDING_PX;
         int maxHeight = getMinHeight();
@@ -44,7 +45,7 @@ public class Row extends Component {
                 int topPadding = Math.max(0, (maxHeight - componentHeight) / 2);
 
                 // Render the component at it's place
-                component.render(new Point(currentWidth, (int) origin.getY() + topPadding), gc);
+                component.render(new Point(currentWidth, (int) origin.getY() + topPadding), gc, style);
 
                 // Add to the current width
                 currentWidth += component.getSize().getWidth() + PADDING_PX;

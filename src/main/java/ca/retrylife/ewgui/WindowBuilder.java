@@ -3,6 +3,8 @@ package ca.retrylife.ewgui;
 import ca.retrylife.ewgui.Window.ConfigurationFlags;
 import ca.retrylife.ewgui.content.components.Component;
 import ca.retrylife.ewgui.content.containers.EmptyContainer;
+import ca.retrylife.ewgui.theming.Style;
+import ca.retrylife.ewgui.theming.styles.DefaultStyle;
 
 public class WindowBuilder {
 
@@ -10,6 +12,7 @@ public class WindowBuilder {
     private Component navbar = new EmptyContainer();
     private ConfigurationFlags[] flags;
     private String title;
+    private Style style = new DefaultStyle();
 
     public WindowBuilder(String title){
         this.title = title;
@@ -31,7 +34,7 @@ public class WindowBuilder {
     }
 
     public Window build(){
-        return new Window(title, navbar, content, flags);
+        return new Window(title, navbar, content, style, flags);
     }
     
 }
