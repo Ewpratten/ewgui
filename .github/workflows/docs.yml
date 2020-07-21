@@ -18,6 +18,10 @@ jobs:
 
       - uses: eskatos/gradle-command-action@v1
         with:
+          arguments: wrapper
+
+      - uses: eskatos/gradle-command-action@v1
+        with:
           arguments: clean javadoc
 
       - name: Check GitHub Pages status
