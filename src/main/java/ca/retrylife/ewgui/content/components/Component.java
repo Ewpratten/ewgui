@@ -11,6 +11,9 @@ public abstract class Component implements Renderable {
     // Component size
     private Size<Integer> size;
 
+    // Component enabled
+    private boolean enabled;
+
     public Component() {
 
     }
@@ -32,6 +35,30 @@ public abstract class Component implements Renderable {
      */
     public Size<Integer> getSize() {
         return this.size;
+    }
+
+    /**
+     * Get the component's minimum height in px
+     * @return Min height
+     */
+    public abstract int getMinHeight();
+
+    /**
+     * Set if the component is enabled (enabled by default)
+     * 
+     * @param enabled Enabled
+     */
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+    }
+
+    /**
+     * Get if the component is enabled
+     * 
+     * @return Enabled
+     */
+    public boolean getEnabled() {
+        return this.enabled;
     }
 
 }
