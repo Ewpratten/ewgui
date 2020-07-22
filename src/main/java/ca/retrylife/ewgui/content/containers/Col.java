@@ -36,10 +36,13 @@ public class Col extends Component {
             for (Component component : components) {
 
                 // Render the component at it's place
-                component.render(new Point((int)origin.getX(), currentHeight), gc, style);
+                component.render(new Point((int) origin.getX(), currentHeight), gc, style);
+                
+                // Get the component's height
+                int componentHeight = component.getSize().getHeightOrDefault(component.getMinHeight());
 
                 // Add to the current width
-                currentHeight += component.getSize().getHeight() + PADDING_PX;
+                currentHeight += componentHeight + PADDING_PX;
             }
         }
     }
@@ -58,14 +61,11 @@ public class Col extends Component {
         super.setSize(size);
 
         // Determine the component sizes
-        int totalSize = size.getWidth();
         Integer widthPerComponent = size.getWidth();
-        Integer heightPerComponent = (size.getHeight() != Size.AUTO) ? size.getHeight() - (PADDING_PX * 2)
-                : getMinHeight();
 
         for (Component component : components) {
             // Set size
-            component.setSize(new Size<Integer>(widthPerComponent, heightPerComponent));
+            component.setSize(new Size<Integer>(widthPerComponent, (Integer)Size.AUTO));
         }
     }
 

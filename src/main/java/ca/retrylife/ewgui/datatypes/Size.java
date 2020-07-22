@@ -66,11 +66,37 @@ public class Size<T> {
     }
 
     /**
+     * Get the height, or default to a value if it is auto
+     * 
+     * @param def Default value
+     * @return Height or default
+     */
+    public T getHeightOrDefault(T def) {
+        if (getHeight() == Size.AUTO) {
+            return def;
+        }
+        return getHeight();
+    }
+
+    /**
      * Get the depth
      * 
      * @return Depth
      */
     public T getDepth() {
         return this.depth;
+    }
+
+    /**
+     * Get the depth, or default to a value if it is auto
+     * 
+     * @param def Default value
+     * @return Depth or default
+     */
+    public T getDepthOrDefault(T def) {
+        if (getDepth() == Size.AUTO) {
+            return def;
+        }
+        return getDepth();
     }
 }
