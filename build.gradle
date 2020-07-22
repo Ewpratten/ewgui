@@ -27,3 +27,8 @@ dependencies {
     // Use JUnit test framework
     testImplementation 'junit:junit:4.12'
 }
+
+
+javadoc{
+  options.addBooleanOption('-no-module-directories', true)
+}
