@@ -7,6 +7,7 @@ import ca.retrylife.ewgui.content.containers.Col;
 import ca.retrylife.ewgui.content.containers.Row;
 import ca.retrylife.ewgui.content.components.Component;
 import ca.retrylife.ewgui.content.components.Button;
+import ca.retrylife.ewgui.content.components.CheckBox;
 import ca.retrylife.ewgui.content.components.Label;
 import ca.retrylife.ewgui.content.components.Toggle;
 import ca.retrylife.ewgui.datatypes.Text;
@@ -38,8 +39,17 @@ public class ExampleWindow {
                         System.out.println("boop");
                     }
                 }
-            )
-            
+            ),
+            new CheckBox(
+                new Text("Check me out"),
+                (on) -> {
+                    if (on) {
+                        System.out.println("I have been checked");
+                    } else {
+                        System.out.println("I have been unchecked");
+                    }
+                }
+            )            
         );
         // @formatter:on
 

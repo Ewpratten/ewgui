@@ -56,6 +56,41 @@ public class RenderUtil {
     }
 
     /**
+     * Render text at a position
+     * 
+     * @param text        Text to render
+     * @param position    Position to render at
+     * @param colors      ColorSet to use
+     * @param boundingBox Component bounding box
+     * @param minHeight   Component minimum height
+     * @param gc          Graphics context
+     */
+    public static void renderPositionedText(Text text, Point position, ColorSet colors, Size<Integer> boundingBox,
+            int minHeight, Graphics2D gc) {
+
+        // TODO: Handle font setting
+
+        // Get font info
+        FontMetrics fm = gc.getFontMetrics();
+
+        // Determine the text size
+        Rectangle2D bounds = fm.getStringBounds(text.getText(), gc);
+        int height = (int) bounds.getHeight();
+
+        // Get the allowed height
+        int maxHeight = (boundingBox.getHeight() != Size.AUTO) ? boundingBox.getHeight() : minHeight;
+
+        // Determine string X/Y
+        int x = position.x;
+        int y = position.y + Math.max(0, ((maxHeight - height) / 2)) + height / 4;
+
+        // Render text
+        gc.setStroke(new BasicStroke(1));
+        gc.setColor(colors.primary);
+        gc.drawString(text.getText(), x, y);
+    }
+
+    /**
      * From a {@link ca.retrylife.ewgui.content.components.Component.ComponentState}
      * get the correct color from the selected {@link Style}
      * 

@@ -19,11 +19,11 @@ import ca.retrylife.ewgui.theming.Style.ColorSet;
 public class Toggle extends Component {
 
     // Toggle data
-    private Text text;
+    protected Text text;
     private Consumer<Boolean> onToggle;
     private boolean toggle = false;
-    private ComponentState currentState = ComponentState.NORMAL;
-    private Point origin = new Point(0, 0);
+    protected ComponentState currentState = ComponentState.NORMAL;
+    protected Point origin = new Point(0, 0);
 
     /**
      * Create a Toggle
