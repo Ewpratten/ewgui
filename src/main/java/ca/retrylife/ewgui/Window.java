@@ -99,26 +99,26 @@ public class Window extends JComponent {
         frame.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-                // Check for a click
-                if ((e.getModifiersEx() & MouseEvent.MOUSE_CLICKED) == MouseEvent.MOUSE_CLICKED) {
-                    switch (e.getButton()) {
-                        case MouseEvent.BUTTON1:
-                            latestMouseState = MouseState.LCLICK;
-                            break;
-                        case MouseEvent.BUTTON2:
-                            latestMouseState = MouseState.MCLICK;
-                            break;
-                        case MouseEvent.BUTTON3:
-                            latestMouseState = MouseState.RCLICK;
-                            break;
-                    }
+
+                // Do a little math to solve click state
+                switch (e.getModifiersEx() / 1024) {
+                    case MouseEvent.BUTTON1:
+                        latestMouseState = MouseState.LCLICK;
+                        break;
+                    case MouseEvent.BUTTON2:
+                        latestMouseState = MouseState.MCLICK;
+                        break;
+                    case MouseEvent.BUTTON3:
+                        latestMouseState = MouseState.RCLICK;
+                        break;
                 }
+
             }
         });
 
         // Configure input thread
         inputThread = new Thread(this::handleUserInput);
-        paintTimer = new Timer(20, new ActionListener(){
+        paintTimer = new Timer(20, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent arg0) {
                 repaint();

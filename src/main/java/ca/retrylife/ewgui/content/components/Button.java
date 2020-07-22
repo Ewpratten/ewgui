@@ -8,6 +8,7 @@ import ca.retrylife.ewgui.content.RenderUtil;
 import ca.retrylife.ewgui.datatypes.Size;
 import ca.retrylife.ewgui.datatypes.Text;
 import ca.retrylife.ewgui.datatypes.UserInput;
+import ca.retrylife.ewgui.datatypes.UserInput.MouseState;
 import ca.retrylife.ewgui.theming.Style;
 import ca.retrylife.ewgui.theming.Style.ColorSet;
 
@@ -51,12 +52,21 @@ public class Button extends Component {
 
     @Override
     public void acceptInput(UserInput input) {
-
-        System.out.println(input.getPoint().y + " " + getSize().getHeight());
-        
+                
         // Handle hover
         if (input.getPoint().x > origin.x && input.getPoint().x < origin.x + getSize().getWidth() && input.getPoint().y > origin.y && input.getPoint().y < origin.y + getSize().getHeight()) {
             currentState = ComponentState.FOCUSED;
+
+            // Handle click
+            if (input.getState().equals(MouseState.LCLICK)) {
+                currentState = ComponentState.PRESSED;
+
+                // Run callback
+                if (onPressed != null) {
+                    onPressed.run();
+                }
+            }
+            
         } else {
             currentState = ComponentState.NORMAL;
         }
