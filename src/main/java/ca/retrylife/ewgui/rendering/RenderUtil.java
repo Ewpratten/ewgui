@@ -61,8 +61,6 @@ public class RenderUtil {
      * @param text        Text to render
      * @param position    Position to render at
      * @param colors      ColorSet to use
-     * @param boundingBox Component bounding box
-     * @param minHeight   Component minimum height
      * @param gc          Graphics context
      */
     public static void renderPositionedText(Text text, Point position, ColorSet colors,  Graphics2D gc) {
