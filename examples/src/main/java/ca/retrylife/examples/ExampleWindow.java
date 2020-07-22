@@ -9,6 +9,7 @@ import ca.retrylife.ewgui.content.components.Component;
 import ca.retrylife.ewgui.content.components.Button;
 import ca.retrylife.ewgui.content.components.CheckBox;
 import ca.retrylife.ewgui.content.components.Label;
+import ca.retrylife.ewgui.content.components.Slider;
 import ca.retrylife.ewgui.content.components.Toggle;
 import ca.retrylife.ewgui.datatypes.Text;
 
@@ -58,6 +59,11 @@ public class ExampleWindow {
                     new Text("I hope you like it here"), 
                     () -> {
                         System.out.println("This button does things too");
+                    }
+                ),
+                new Slider<Integer>(
+                    (value) -> {
+                        System.out.println(String.format("Slider is now: %d", value));
                     }
                 )
             )   

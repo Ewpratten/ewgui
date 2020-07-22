@@ -59,7 +59,7 @@ public class Button extends Component {
         gc.fillRect((int) origin.getX(), (int) origin.getY(), (int) width, (int) height);
 
         // Render border
-        gc.setColor(colors.secondary);
+        gc.setColor(colors.primary);
         gc.setStroke(new BasicStroke(3));
         gc.drawRect((int) origin.getX(), (int) origin.getY(), (int) width, (int) height);
 
