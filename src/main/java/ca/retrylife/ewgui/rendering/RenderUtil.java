@@ -42,7 +42,7 @@ public class RenderUtil {
 
         // Get the allowed height and width
         int maxWidth = boundingBox.getWidth();
-        int maxHeight = (boundingBox.getHeight() != Size.AUTO) ? boundingBox.getHeight() : minHeight;
+        int maxHeight = boundingBox.getHeightOrDefault(minHeight);
 
         // Determine string X/Y
         int x = (int) origin.getX() + Math.max(0, ((maxWidth - width) / 2));

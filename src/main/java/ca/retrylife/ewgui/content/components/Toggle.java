@@ -71,7 +71,7 @@ public class Toggle extends Component {
         this.origin = origin;
 
         // Get Toggle sizing
-        int height = (getSize().getHeight() != Size.AUTO) ? getSize().getHeight() : getMinHeight();
+        int height = getSize().getHeightOrDefault(getMinHeight());
         int width = getSize().getWidth();
 
         // Get the current color theme

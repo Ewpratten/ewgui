@@ -45,8 +45,6 @@ public class CheckBox extends Toggle {
         int topPadding = Math.max(0, (getSize().getHeight() - checkBoxSize) / 2);
         int checkGap = 3;
 
-        System.out.println(checkBoxSize + " " + topPadding + " " + getSize().getHeight());
-
         // Get the color theme
         ColorSet colors = RenderUtil.getColorForState(super.currentState, style);
 

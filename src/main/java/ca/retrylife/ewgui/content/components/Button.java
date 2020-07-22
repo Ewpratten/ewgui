@@ -48,7 +48,7 @@ public class Button extends Component {
         this.origin = origin;
 
         // Get button sizing
-        int height = (getSize().getHeight() != Size.AUTO) ? getSize().getHeight() : getMinHeight();
+        int height = getSize().getHeightOrDefault(getMinHeight());
         int width = getSize().getWidth();
 
         // Get the current color theme
