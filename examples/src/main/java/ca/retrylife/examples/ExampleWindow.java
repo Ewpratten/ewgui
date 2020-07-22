@@ -8,6 +8,7 @@ import ca.retrylife.ewgui.content.containers.Row;
 import ca.retrylife.ewgui.content.components.Component;
 import ca.retrylife.ewgui.content.components.Button;
 import ca.retrylife.ewgui.content.components.Label;
+import ca.retrylife.ewgui.content.components.Toggle;
 import ca.retrylife.ewgui.datatypes.Text;
 
 public class ExampleWindow {
@@ -26,6 +27,16 @@ public class ExampleWindow {
                 new Text("I am a button!"),
                 () -> {
                     System.out.println("The button has been pressed");
+                }
+            ),
+            new Toggle(
+                new Text("You can toggle me"),
+                (on) -> {
+                    if (on) {
+                        System.out.println("beep");
+                    }else{
+                        System.out.println("boop");
+                    }
                 }
             )
             
