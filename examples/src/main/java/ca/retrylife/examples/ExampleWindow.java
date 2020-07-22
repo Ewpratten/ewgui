@@ -21,35 +21,46 @@ public class ExampleWindow {
 
         // Content
         // @formatter:off
-        Component content = new Row(
-            new Label(new Text("Hello, world")),
-            new Label(new Text("There are two of us!")),
-            new Button(
-                new Text("I am a button!"),
-                () -> {
-                    System.out.println("The button has been pressed");
-                }
-            ),
-            new Toggle(
-                new Text("You can toggle me"),
-                (on) -> {
-                    if (on) {
-                        System.out.println("beep");
-                    }else{
-                        System.out.println("boop");
+        Component content = new Col(
+            new Row(
+                new Label(new Text("Hello, world")),
+                new Label(new Text("There are two of us!")),
+                new Button(
+                    new Text("I am a button!"),
+                    () -> {
+                        System.out.println("The button has been pressed");
                     }
-                }
-            ),
-            new CheckBox(
-                new Text("Check me out"),
-                (on) -> {
-                    if (on) {
-                        System.out.println("I have been checked");
-                    } else {
-                        System.out.println("I have been unchecked");
+                ),
+                new Toggle(
+                    new Text("You can toggle me"),
+                    (on) -> {
+                        if (on) {
+                            System.out.println("beep");
+                        }else{
+                            System.out.println("boop");
+                        }
                     }
-                }
-            )            
+                ),
+                new CheckBox(
+                    new Text("Check me out"),
+                    (on) -> {
+                        if (on) {
+                            System.out.println("I have been checked");
+                        } else {
+                            System.out.println("I have been unchecked");
+                        }
+                    }
+                )    
+            ),
+            new Row(
+                new Label(new Text("Welcome to the second row!")),
+                new Button(
+                    new Text("I hope you like it here"), 
+                    () -> {
+                        System.out.println("This button does things too");
+                    }
+                )
+            )   
         );
         // @formatter:on
 

@@ -58,8 +58,8 @@ public class Col extends Component {
         super.setSize(size);
 
         // Determine the component sizes
-        int totalSize = size.getWidth() - (PADDING_PX * (components.length + 1));
-        Integer widthPerComponent = totalSize / Math.max(1, components.length);
+        int totalSize = size.getWidth();
+        Integer widthPerComponent = size.getWidth();
         Integer heightPerComponent = (size.getHeight() != Size.AUTO) ? size.getHeight() - (PADDING_PX * 2)
                 : getMinHeight();
 
