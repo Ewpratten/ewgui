@@ -65,8 +65,7 @@ public class RenderUtil {
      * @param minHeight   Component minimum height
      * @param gc          Graphics context
      */
-    public static void renderPositionedText(Text text, Point position, ColorSet colors, Size<Integer> boundingBox,
-            int minHeight, Graphics2D gc) {
+    public static void renderPositionedText(Text text, Point position, ColorSet colors,  Graphics2D gc) {
 
         // TODO: Handle font setting
 
@@ -77,12 +76,9 @@ public class RenderUtil {
         Rectangle2D bounds = fm.getStringBounds(text.getText(), gc);
         int height = (int) bounds.getHeight();
 
-        // Get the allowed height
-        int maxHeight = (boundingBox.getHeight() != Size.AUTO) ? boundingBox.getHeight() : minHeight;
-
         // Determine string X/Y
         int x = position.x;
-        int y = position.y + Math.max(0, ((maxHeight - height) / 2)) + height / 4;
+        int y = position.y + (height / 2);
 
         // Render text
         gc.setStroke(new BasicStroke(1));

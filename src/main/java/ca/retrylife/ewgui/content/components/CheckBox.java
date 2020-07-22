@@ -64,10 +64,10 @@ public class CheckBox extends Toggle {
 
         // Determine text position
         Point textPose = new Point((origin.x + checkBoxSize) + (topPadding / 2),
-                origin.y + ((checkBoxSize - topPadding) / 2));
+                origin.y + (checkBoxSize / 2) + topPadding);
 
         // Render the checkbox text
-        RenderUtil.renderPositionedText(text, textPose, colors, getSize(), getMinHeight(), gc);
+        RenderUtil.renderPositionedText(text, textPose, colors, gc);
 
     }
 
