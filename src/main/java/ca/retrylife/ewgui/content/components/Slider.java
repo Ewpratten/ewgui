@@ -84,8 +84,8 @@ public class Slider<T extends Number> extends Component {
         this.origin = origin;
 
         // Determine box height
-        int boxHeight = Math.max(Math.min(30, getSize().getHeight()), getSize().getHeight() / 2);
-        int topPadding = Math.max(0, (getSize().getHeight() - boxHeight) / 2);
+        int boxHeight = Math.max(Math.min(30, getSize().getHeightOrDefault(getMinHeight())), getSize().getHeightOrDefault(getMinHeight()) / 2);
+        int topPadding = Math.max(0, (getSize().getHeightOrDefault(getMinHeight()) - boxHeight) / 2);
         int innerGap = 5;
 
         // Get the color set
@@ -153,7 +153,7 @@ public class Slider<T extends Number> extends Component {
 
         // Handle hover
         if (input.getPoint().x > origin.x && input.getPoint().x < origin.x + getSize().getWidth()
-                && input.getPoint().y > origin.y && input.getPoint().y < origin.y + getSize().getHeight()) {
+                && input.getPoint().y > origin.y && input.getPoint().y < origin.y + getSize().getHeightOrDefault(getMinHeight())) {
             currentState = ComponentState.FOCUSED;
 
             // Calculate the possible value based on mouse position

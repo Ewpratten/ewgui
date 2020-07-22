@@ -9,6 +9,7 @@ import ca.retrylife.ewgui.content.components.Component;
 import ca.retrylife.ewgui.content.components.Button;
 import ca.retrylife.ewgui.content.components.CheckBox;
 import ca.retrylife.ewgui.content.components.Label;
+import ca.retrylife.ewgui.content.components.NamedComponent;
 import ca.retrylife.ewgui.content.components.ProgressBar;
 import ca.retrylife.ewgui.content.components.Slider;
 import ca.retrylife.ewgui.content.components.Toggle;
@@ -83,6 +84,16 @@ public class ExampleWindow {
                     (enabled) -> {
                         row2.setEnabled(enabled);
                     }
+                ),
+                new NamedComponent(
+                    new Text("I have a name"), 
+                    new Slider<Double>(
+                        0.0,
+                        1.0,
+                        (value) -> {
+                            // Do nothing with the value
+                        }
+                    )
                 )
             )
         );
