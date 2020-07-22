@@ -1,4 +1,4 @@
-package ca.retrylife.ewgui.content;
+package ca.retrylife.ewgui.rendering;
 
 import java.awt.FontMetrics;
 import java.awt.geom.Rectangle2D;

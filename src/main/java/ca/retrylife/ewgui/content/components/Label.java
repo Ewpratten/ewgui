@@ -5,7 +5,7 @@ import java.awt.Point;
 import java.awt.FontMetrics;
 import java.awt.geom.Rectangle2D;
 
-import ca.retrylife.ewgui.content.RenderUtil;
+import ca.retrylife.ewgui.rendering.RenderUtil;
 import ca.retrylife.ewgui.datatypes.Size;
 import ca.retrylife.ewgui.datatypes.Text;
 import ca.retrylife.ewgui.theming.Style;

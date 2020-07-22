@@ -5,7 +5,7 @@ import java.awt.Point;
 import java.util.function.Consumer;
 import java.awt.BasicStroke;
 
-import ca.retrylife.ewgui.content.RenderUtil;
+import ca.retrylife.ewgui.rendering.RenderUtil;
 import ca.retrylife.ewgui.datatypes.Size;
 import ca.retrylife.ewgui.datatypes.Text;
 import ca.retrylife.ewgui.datatypes.UserInput;
