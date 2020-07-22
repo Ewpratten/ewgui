@@ -5,6 +5,8 @@ import ca.retrylife.ewgui.WindowBuilder;
 import ca.retrylife.ewgui.Window.ConfigurationFlags;
 import ca.retrylife.ewgui.content.containers.Col;
 import ca.retrylife.ewgui.content.containers.Row;
+import ca.retrylife.ewgui.content.components.Component;
+import ca.retrylife.ewgui.content.components.Button;
 import ca.retrylife.ewgui.content.components.Label;
 import ca.retrylife.ewgui.datatypes.Text;
 
@@ -17,11 +19,16 @@ public class ExampleWindow {
 
         // Content
         // @formatter:off
-        Col content = new Col(
-            new Row(
-                new Label(new Text("Hello, world")),
-                new Label(new Text("There are two of us!"))
+        Component content = new Row(
+            new Label(new Text("Hello, world")),
+            new Label(new Text("There are two of us!")),
+            new Button(
+                new Text("I am a button!"),
+                () -> {
+                    System.out.println("The button has been pressed");
+                }
             )
+            
         );
         // @formatter:on
 

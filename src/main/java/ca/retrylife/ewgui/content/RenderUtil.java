@@ -4,17 +4,31 @@ import java.awt.FontMetrics;
 import java.awt.geom.Rectangle2D;
 import java.awt.Graphics2D;
 import java.awt.Point;
-import java.awt.Color;
+import java.awt.BasicStroke;
 
 import ca.retrylife.ewgui.content.components.Component.ComponentState;
 import ca.retrylife.ewgui.datatypes.Size;
 import ca.retrylife.ewgui.datatypes.Text;
 import ca.retrylife.ewgui.theming.Style;
+import ca.retrylife.ewgui.theming.Style.ColorSet;
 
+/**
+ * A util class for rendering things
+ */
 public class RenderUtil {
 
-    public static void renderCentredText(Text text, Point origin, Size<Integer> boundingBox, ComponentState state,
-            int minHeight, boolean enabled, Graphics2D gc, Style style) {
+    /**
+     * Render centred text
+     * 
+     * @param text        Text to render
+     * @param origin      Origin point (top left of box)
+     * @param boundingBox The allowed size to render in
+     * @param colors      The theme's color set
+     * @param minHeight   The minimum height of the component
+     * @param gc          The Graphics2D context
+     */
+    public static void renderCentredText(Text text, Point origin, Size<Integer> boundingBox, ColorSet colors,
+            int minHeight, Graphics2D gc) {
 
         // TODO: Handle font setting
 
@@ -28,30 +42,39 @@ public class RenderUtil {
 
         // Get the allowed height and width
         int maxWidth = boundingBox.getWidth();
-        int maxHeight = (boundingBox.getHeight() != null) ? boundingBox.getHeight() : minHeight;
+        int maxHeight = (boundingBox.getHeight() != Size.AUTO) ? boundingBox.getHeight() : minHeight;
 
         // Determine string X/Y
         int x = (int) origin.getX() + Math.max(0, ((maxWidth - width) / 2));
         int y = (int) origin.getY() + Math.max(0, ((maxHeight - height) / 2)) + height;
 
         // Render text
-        gc.setColor((getEnabled()) ? style.getNormalColor() : style.getDisabledColor());
-        gc.drawString(this.text.getText(), x, y);
+        gc.setStroke(new BasicStroke(1));
+        gc.setColor(colors.primary);
+        gc.drawString(text.getText(), x, y);
 
     }
 
-    public static Color getColorForState(ComponentState state, Style style) {
+    /**
+     * From a {@link ca.retrylife.ewgui.content.components.Component.ComponentState}
+     * get the correct color from the selected {@link Style}
+     * 
+     * @param state State
+     * @param style Style
+     * @return Correct color set to use
+     */
+    public static ColorSet getColorForState(ComponentState state, Style style) {
         switch (state) {
             case DISABLED:
-                return style.getDisabledColor();
+                return style.getDisabled();
             case FOCUSED:
-                break;
+                return style.getFocused();
             case NORMAL:
-                break;
+                return style.getNormal();
             case PRESSED:
-                break;
+                return style.getPressed();
             default:
-                break;
+                return style.getNormal();
 
         }
     }

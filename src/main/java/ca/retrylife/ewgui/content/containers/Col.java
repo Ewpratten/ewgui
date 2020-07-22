@@ -5,6 +5,7 @@ import java.awt.Point;
 
 import ca.retrylife.ewgui.content.components.Component;
 import ca.retrylife.ewgui.datatypes.Size;
+import ca.retrylife.ewgui.datatypes.UserInput;
 import ca.retrylife.ewgui.theming.Style;
 
 public class Col extends Component {
@@ -40,6 +41,15 @@ public class Col extends Component {
                 // Add to the current width
                 currentHeight += component.getSize().getHeight() + PADDING_PX;
             }
+        }
+    }
+
+    @Override
+    public void acceptInput(UserInput input) {
+        
+        // Send input data to all children
+        for (Component component : components) {
+            component.acceptInput(input);
         }
     }
 

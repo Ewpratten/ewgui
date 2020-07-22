@@ -5,6 +5,7 @@ import java.awt.Point;
 
 import ca.retrylife.ewgui.content.components.Component;
 import ca.retrylife.ewgui.datatypes.Size;
+import ca.retrylife.ewgui.datatypes.UserInput;
 import ca.retrylife.ewgui.theming.Style;
 
 /**
@@ -38,18 +39,21 @@ public class Row extends Component {
 
         synchronized (gc) {
             for (Component component : components) {
-                // Get the component's height
-                int componentHeight = component.getMinHeight();
-
-                // Determine how much vertical padding to provide
-                int topPadding = Math.max(0, (maxHeight - componentHeight) / 2);
-
                 // Render the component at it's place
-                component.render(new Point(currentWidth, (int) origin.getY() + topPadding), gc, style);
+                component.render(new Point(currentWidth, (int) origin.getY()), gc, style);
 
                 // Add to the current width
                 currentWidth += component.getSize().getWidth() + PADDING_PX;
             }
+        }
+    }
+
+    @Override
+    public void acceptInput(UserInput input) {
+        
+        // Send input data to all children
+        for (Component component : components) {
+            component.acceptInput(input);
         }
     }
 
@@ -60,7 +64,7 @@ public class Row extends Component {
         // Determine the component sizes
         int totalSize = size.getWidth() - (PADDING_PX * (components.length + 1));
         Integer widthPerComponent = totalSize / Math.max(1, components.length);
-        Integer heightPerComponent = (size.getHeight() != Size.AUTO) ? size.getHeight() - (PADDING_PX * 2)
+        Integer heightPerComponent = (size.getHeight() != (Integer)Size.AUTO) ? size.getHeight() - (PADDING_PX * 2)
                 : getMinHeight();
 
         for (Component component : components) {
@@ -93,7 +97,7 @@ public class Row extends Component {
             }
         }
 
-        return height;
+        return height + PADDING_PX;
     }
 
 }

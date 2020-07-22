@@ -13,7 +13,7 @@ public class DefaultStyle extends Style {
 
     @Override
     public ColorSet getNormal() {
-        return new ColorSet(new Color(0x68, 0x68, 0x68), new Color(0x97, 0xe8, 0xff), new Color(0xc9, 0xc9, 0xc9));
+        return new ColorSet(new Color(0x68, 0x68, 0x68), new Color(0x68, 0x68, 0x68), new Color(0xc9, 0xc9, 0xc9));
     }
 
     @Override

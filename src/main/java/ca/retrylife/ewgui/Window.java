@@ -5,14 +5,23 @@ import java.awt.Graphics2D;
 
 import javax.swing.JComponent;
 import javax.swing.JFrame;
+import javax.swing.SwingUtilities;
+import javax.swing.Timer;
+
 import java.awt.Point;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.awt.Dimension;
+import java.awt.MouseInfo;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import ca.retrylife.ewgui.content.components.Component;
-import ca.retrylife.ewgui.content.containers.Row;
 import ca.retrylife.ewgui.datatypes.Size;
+import ca.retrylife.ewgui.datatypes.UserInput;
+import ca.retrylife.ewgui.datatypes.UserInput.MouseState;
 import ca.retrylife.ewgui.theming.Style;
 
 public class Window extends JComponent {
@@ -28,6 +37,15 @@ public class Window extends JComponent {
     // Window style
     private Style style;
 
+    // User input
+    private UserInput input;
+    private Thread inputThread;
+    private MouseState latestMouseState = MouseState.NONE;
+
+    // Running
+    private Timer paintTimer;
+    private boolean running = false;
+
     public enum ConfigurationFlags {
         EXIT_ON_CLOSE, NO_RESIZE, SPAWN_CENTRE
     }
@@ -39,7 +57,7 @@ public class Window extends JComponent {
         frame.add(this);
         frame.setSize(800, 600);
         frame.setLocationRelativeTo(null);
-        frame.setPreferredSize(new Dimension(800,600));
+        frame.setPreferredSize(new Dimension(800, 600));
 
         for (ConfigurationFlags flag : flags) {
 
@@ -78,9 +96,60 @@ public class Window extends JComponent {
             }
         });
 
+        frame.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                // Check for a click
+                if ((e.getModifiersEx() & MouseEvent.MOUSE_CLICKED) == MouseEvent.MOUSE_CLICKED) {
+                    switch (e.getButton()) {
+                        case MouseEvent.BUTTON1:
+                            latestMouseState = MouseState.LCLICK;
+                            break;
+                        case MouseEvent.BUTTON2:
+                            latestMouseState = MouseState.MCLICK;
+                            break;
+                        case MouseEvent.BUTTON3:
+                            latestMouseState = MouseState.RCLICK;
+                            break;
+                    }
+                }
+            }
+        });
+
+        // Configure input thread
+        inputThread = new Thread(this::handleUserInput);
+        paintTimer = new Timer(20, new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent arg0) {
+                repaint();
+            }
+        });
+
         // Show the window
         frame.setVisible(true);
+        running = true;
+        inputThread.start();
+        paintTimer.start();
 
+    }
+
+    /**
+     * Hide the window and stop inputs
+     */
+    public void hide() {
+        frame.setVisible(false);
+        paintTimer.stop();
+        running = false;
+    }
+
+    /**
+     * Show the window and start inputs
+     */
+    public void show() {
+        frame.setVisible(true);
+        running = true;
+        inputThread.start();
+        paintTimer.start();
     }
 
     private void resize(Size<Integer> size) {
@@ -109,12 +178,32 @@ public class Window extends JComponent {
             content.render(new Point(0, currentHeight), gc, style);
         }
 
-        try{
-            Thread.sleep(20);
-        } catch (InterruptedException e) {
-            
-        }
+    }
 
+    private void handleUserInput() {
+
+        while (running) {
+            // Get mouse position
+            Point mouseLoc = MouseInfo.getPointerInfo().getLocation();
+            SwingUtilities.convertPointFromScreen(mouseLoc, this);
+
+            // Get mouse click
+            MouseState mouseState = latestMouseState;
+            latestMouseState = MouseState.NONE;
+
+            // Create input object
+            input = new UserInput(mouseState, mouseLoc, '\0');
+
+            // Call children with input data
+            navbar.acceptInput(input);
+            content.acceptInput(input);
+
+            try {
+                Thread.sleep(20);
+            } catch (InterruptedException e) {
+
+            }
+        }
     }
 
 }

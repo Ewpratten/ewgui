@@ -8,6 +8,8 @@ import ca.retrylife.ewgui.rendering.Renderable;
  */
 public abstract class Component implements Renderable {
 
+    public static final int GLOBAL_DEFAULT_MIN_HEIGHT = 60;
+
     /**
      * The state of the component
      */
@@ -16,7 +18,7 @@ public abstract class Component implements Renderable {
     }
 
     // Component size
-    private Size<Integer> size = new Size<Integer>(0,0);
+    private Size<Integer> size = new Size<Integer>(0, (Integer) Size.AUTO);
 
     // Component enabled
     private boolean enabled = true;
@@ -46,6 +48,7 @@ public abstract class Component implements Renderable {
 
     /**
      * Get the component's minimum height in px
+     * 
      * @return Min height
      */
     public abstract int getMinHeight();
