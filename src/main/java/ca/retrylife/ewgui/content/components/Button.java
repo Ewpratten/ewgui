@@ -12,6 +12,9 @@ import ca.retrylife.ewgui.datatypes.UserInput.MouseState;
 import ca.retrylife.ewgui.theming.Style;
 import ca.retrylife.ewgui.theming.Style.ColorSet;
 
+/**
+ * Clickable buttons
+ */
 public class Button extends Component {
 
     // Button data
@@ -20,9 +23,24 @@ public class Button extends Component {
     private ComponentState currentState = ComponentState.NORMAL;
     private Point origin = new Point(0, 0);
 
+    /**
+     * Create a Button
+     * 
+     * @param text      Text inside button
+     * @param onPressed Something to be run when the button is pressed
+     */
     public Button(Text text, Runnable onPressed) {
         this.text = text;
         this.onPressed = onPressed;
+    }
+
+    /**
+     * Set the button text
+     * 
+     * @param text Button text
+     */
+    public void setText(Text text) {
+        this.text = text;
     }
 
     @Override
@@ -52,9 +70,10 @@ public class Button extends Component {
 
     @Override
     public void acceptInput(UserInput input) {
-                
+
         // Handle hover
-        if (input.getPoint().x > origin.x && input.getPoint().x < origin.x + getSize().getWidth() && input.getPoint().y > origin.y && input.getPoint().y < origin.y + getSize().getHeight()) {
+        if (input.getPoint().x > origin.x && input.getPoint().x < origin.x + getSize().getWidth()
+                && input.getPoint().y > origin.y && input.getPoint().y < origin.y + getSize().getHeight()) {
             currentState = ComponentState.FOCUSED;
 
             // Handle click
@@ -66,7 +85,7 @@ public class Button extends Component {
                     onPressed.run();
                 }
             }
-            
+
         } else {
             currentState = ComponentState.NORMAL;
         }

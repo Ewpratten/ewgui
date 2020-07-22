@@ -13,6 +13,9 @@ import ca.retrylife.ewgui.datatypes.UserInput.MouseState;
 import ca.retrylife.ewgui.theming.Style;
 import ca.retrylife.ewgui.theming.Style.ColorSet;
 
+/**
+ * CheckBox component
+ */
 public class Toggle extends Component {
 
     // Toggle data
@@ -22,9 +25,45 @@ public class Toggle extends Component {
     private ComponentState currentState = ComponentState.NORMAL;
     private Point origin = new Point(0, 0);
 
+    /**
+     * Create a Toggle
+     * 
+     * @param text     Text inside toggle button
+     * @param onToggle Consumer to accept state changes
+     */
     public Toggle(Text text, Consumer<Boolean> onToggle) {
+        this(false, text, onToggle);
+    }
+
+    /**
+     * Create a Toggle
+     * 
+     * @param enabledByDefault Is this toggle toggled by default?
+     * @param text             Text inside toggle button
+     * @param onToggle         Consumer to accept state changes
+     */
+    public Toggle(boolean enabledByDefault, Text text, Consumer<Boolean> onToggle) {
         this.text = text;
         this.onToggle = onToggle;
+        this.toggle = enabledByDefault;
+    }
+
+    /**
+     * Set the toggle text
+     * 
+     * @param text Toggle text
+     */
+    public void setText(Text text) {
+        this.text = text;
+    }
+
+    /**
+     * Set the toggle state
+     * 
+     * @param toggle Is the toggle toggled?
+     */
+    public void setToggle(boolean toggle) {
+        this.toggle = toggle;
     }
 
     @Override

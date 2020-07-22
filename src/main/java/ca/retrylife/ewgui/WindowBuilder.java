@@ -14,7 +14,7 @@ public class WindowBuilder {
     private String title;
     private Style style = new DefaultStyle();
 
-    public WindowBuilder(String title){
+    public WindowBuilder(String title) {
         this.title = title;
     }
 
@@ -28,13 +28,18 @@ public class WindowBuilder {
         return this;
     }
 
-    public WindowBuilder withConfiguration(ConfigurationFlags ... flags){
+    public WindowBuilder withConfiguration(ConfigurationFlags... flags) {
         this.flags = flags;
         return this;
     }
 
-    public Window build(){
+    public WindowBuilder withStile(Style style) {
+        this.style = style;
+        return this;
+    }
+
+    public Window build() {
         return new Window(title, navbar, content, style, flags);
     }
-    
+
 }

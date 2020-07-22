@@ -15,6 +15,7 @@ public interface Renderable {
      * @param origin The top left coordinate of this component on the screen. Start
      *               drawing here.
      * @param gc     Graphics
+     * @param style  Window style
      */
     public void render(Point origin, Graphics2D gc, Style style);
 
