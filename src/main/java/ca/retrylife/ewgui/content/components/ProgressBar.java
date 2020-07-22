@@ -9,8 +9,19 @@ import ca.retrylife.ewgui.rendering.RenderUtil;
 import ca.retrylife.ewgui.theming.Style;
 import ca.retrylife.ewgui.theming.Style.ColorSet;
 
+/**
+ * A bar showing progress
+ * 
+ * @param <T> Value type
+ */
 public class ProgressBar<T extends Number> extends Slider<T> {
 
+    /**
+     * Create a ProgressBar
+     * 
+     * @param minValue Minimum value
+     * @param maxValue Maximum value
+     */
     public ProgressBar(T minValue, T maxValue) {
         super(minValue, maxValue, (x) -> {
         });
