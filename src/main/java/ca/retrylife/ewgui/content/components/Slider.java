@@ -21,12 +21,12 @@ import ca.retrylife.ewgui.theming.Style.ColorSet;
 public class Slider<T extends Number> extends Component {
 
     // Data
-    private T value;
-    private T minValue;
-    private T maxValue;
+    protected T value;
+    protected T minValue;
+    protected T maxValue;
     private Consumer<T> onChange;
-    private ComponentState currentState = ComponentState.NORMAL;
-    private Point origin = new Point(0, 0);
+    protected ComponentState currentState = ComponentState.NORMAL;
+    protected Point origin = new Point(0, 0);
     private T possibleNewValue;
 
     /**
@@ -64,8 +64,10 @@ public class Slider<T extends Number> extends Component {
      * @param value Value
      */
     public void setValue(T value) {
-        this.value = value;
-        this.possibleNewValue = value;
+        if (getEnabled()) {
+            this.value = value;
+            this.possibleNewValue = value;
+        }
     }
 
     /**
@@ -144,6 +146,11 @@ public class Slider<T extends Number> extends Component {
     @SuppressWarnings("unchecked")
     public void acceptInput(UserInput input) {
 
+        // Skip User input if disabled
+        if (!getEnabled()) {
+            return;
+        }
+
         // Handle hover
         if (input.getPoint().x > origin.x && input.getPoint().x < origin.x + getSize().getWidth()
                 && input.getPoint().y > origin.y && input.getPoint().y < origin.y + getSize().getHeight()) {
@@ -195,7 +202,7 @@ public class Slider<T extends Number> extends Component {
     }
 
     @Override
-    public void setEnabled(boolean enabled) {
+    public Component setEnabled(boolean enabled) {
         super.setEnabled(enabled);
 
         // Set the component state
@@ -204,6 +211,8 @@ public class Slider<T extends Number> extends Component {
         } else {
             currentState = ComponentState.DISABLED;
         }
+
+        return this;
     }
 
     @Override

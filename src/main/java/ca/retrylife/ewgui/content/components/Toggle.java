@@ -94,6 +94,12 @@ public class Toggle extends Component {
     @Override
     public void acceptInput(UserInput input) {
 
+        // Don't handle User Input if disabled
+        if (!getEnabled()) {
+            this.currentState = ComponentState.DISABLED;
+            return;
+        }
+
         // Handle hover
         if (input.getPoint().x > origin.x && input.getPoint().x < origin.x + getSize().getWidth()
                 && input.getPoint().y > origin.y && input.getPoint().y < origin.y + getSize().getHeight()) {
@@ -118,18 +124,6 @@ public class Toggle extends Component {
             } else {
                 currentState = ComponentState.NORMAL;
             }
-        }
-    }
-
-    @Override
-    public void setEnabled(boolean enabled) {
-        super.setEnabled(enabled);
-
-        // Set the component state
-        if (enabled) {
-            currentState = ComponentState.NORMAL;
-        } else {
-            currentState = ComponentState.DISABLED;
         }
     }
 

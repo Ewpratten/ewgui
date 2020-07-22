@@ -70,13 +70,15 @@ public class Col extends Component {
     }
 
     @Override
-    public void setEnabled(boolean enabled) {
+    public Component setEnabled(boolean enabled) {
         super.setEnabled(enabled);
 
         // Set all children
         for (Component component : components) {
             component.setEnabled(enabled);
         }
+
+        return this;
     }
 
     @Override

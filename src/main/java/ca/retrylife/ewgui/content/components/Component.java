@@ -58,8 +58,9 @@ public abstract class Component implements Renderable {
      * 
      * @param enabled Enabled
      */
-    public void setEnabled(boolean enabled) {
+    public Component setEnabled(boolean enabled) {
         this.enabled = enabled;
+        return this;
     }
 
     /**

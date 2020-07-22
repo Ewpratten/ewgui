@@ -9,6 +9,7 @@ import ca.retrylife.ewgui.content.components.Component;
 import ca.retrylife.ewgui.content.components.Button;
 import ca.retrylife.ewgui.content.components.CheckBox;
 import ca.retrylife.ewgui.content.components.Label;
+import ca.retrylife.ewgui.content.components.ProgressBar;
 import ca.retrylife.ewgui.content.components.Slider;
 import ca.retrylife.ewgui.content.components.Toggle;
 import ca.retrylife.ewgui.datatypes.Text;
@@ -20,8 +21,29 @@ public class ExampleWindow {
 
     public ExampleWindow() {
 
-        // Content
+        // A counter for the time
+        ProgressBar<Integer> secondsCounter = new ProgressBar<>(0, 60);
+
         // @formatter:off
+
+        // A row that needs to be controlled by a button
+        Row row2 = new Row(
+            new Label(new Text("Welcome to the second row!")),
+            new Button(
+                new Text("I hope you like it here"), 
+                () -> {
+                    System.out.println("This button does things too");
+                }
+            ),
+            new Slider<Integer>(
+                (value) -> {
+                    System.out.println(String.format("Slider is now: %d", value));
+                }
+            ),
+            secondsCounter
+        );
+
+        // The main content panel
         Component content = new Col(
             new Row(
                 new Label(new Text("Hello, world")),
@@ -53,25 +75,26 @@ public class ExampleWindow {
                     }
                 )    
             ),
+            row2,
             new Row(
-                new Label(new Text("Welcome to the second row!")),
-                new Button(
-                    new Text("I hope you like it here"), 
-                    () -> {
-                        System.out.println("This button does things too");
-                    }
-                ),
-                new Slider<Integer>(
-                    (value) -> {
-                        System.out.println(String.format("Slider is now: %d", value));
+                new CheckBox(
+                    true,
+                    new Text("Enable Row 2"),
+                    (enabled) -> {
+                        row2.setEnabled(enabled);
                     }
                 )
-            )   
+            )
         );
         // @formatter:on
 
         // Create a window
         Window window = new WindowBuilder("Example window").withConfiguration(ConfigurationFlags.EXIT_ON_CLOSE)
                 .withContent(content).build();
+
+        // Event loop to update the seconds counter
+        window.setPreRenderLoop(() -> {
+            secondsCounter.setValue((int) (System.currentTimeMillis() / 1000) % 60);
+        });
     }
 }

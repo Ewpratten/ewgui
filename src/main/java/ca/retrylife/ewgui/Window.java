@@ -46,6 +46,9 @@ public class Window extends JComponent {
     private Timer paintTimer;
     private boolean running = false;
 
+    // pre-render
+    private Runnable preRenderAction;
+
     public enum ConfigurationFlags {
         EXIT_ON_CLOSE, NO_RESIZE, SPAWN_CENTRE
     }
@@ -134,6 +137,14 @@ public class Window extends JComponent {
     }
 
     /**
+     * Set an action to be run before each render
+     * @param action Pre-render action
+     */
+    public void setPreRenderLoop(Runnable action){
+        this.preRenderAction = action;
+    }
+
+    /**
      * Hide the window and stop inputs
      */
     public void hide() {
@@ -160,6 +171,11 @@ public class Window extends JComponent {
     @Override
     public void paint(Graphics arg0) {
         Graphics2D gc = (Graphics2D) arg0;
+
+        // Handle pre-render
+        if(this.preRenderAction != null){
+            this.preRenderAction.run();
+        }
 
         // Tracker for height
         int currentHeight = 0;
