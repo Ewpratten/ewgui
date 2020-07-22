@@ -5,7 +5,7 @@ package ca.retrylife.ewgui.datatypes;
  * 
  * @param <T> Quantity type
  */
-public class Size<T> {
+public class Size<T extends Number> {
 
     // Use this to specify an automatic size in a dimension
     public static Object AUTO = null;
@@ -79,6 +79,17 @@ public class Size<T> {
     }
 
     /**
+     * Get the smallest of the size height and a default height
+     * 
+     * @param def Default height
+     * @return Smallest height
+     */
+    @SuppressWarnings("unchecked")
+    public T getSmallestHeight(T def) {
+        return (T) (Number) Math.min(def.doubleValue(), getHeightOrDefault(def).doubleValue());
+    }
+
+    /**
      * Get the depth
      * 
      * @return Depth
@@ -98,5 +109,9 @@ public class Size<T> {
             return def;
         }
         return getDepth();
+    }
+
+    public static <T> T castToNumberBasedT(Object obj, Class<T> clazz) {
+        return clazz.cast(obj);
     }
 }

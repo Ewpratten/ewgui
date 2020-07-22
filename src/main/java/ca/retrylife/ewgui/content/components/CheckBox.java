@@ -6,6 +6,7 @@ import java.util.function.Consumer;
 import java.awt.BasicStroke;
 
 import ca.retrylife.ewgui.rendering.RenderUtil;
+import ca.retrylife.ewgui.datatypes.Size;
 import ca.retrylife.ewgui.datatypes.Text;
 import ca.retrylife.ewgui.theming.Style;
 import ca.retrylife.ewgui.theming.Style.ColorSet;
@@ -41,8 +42,8 @@ public class CheckBox extends Toggle {
         super.origin = origin;
 
         // Determine size of the checkbox
-        int checkBoxSize = Math.max(Math.min(30, getSize().getHeight()), getSize().getHeight() / 2);
-        int topPadding = Math.max(0, (getSize().getHeight() - checkBoxSize) / 2);
+        int checkBoxSize = Math.max(Math.min(30, getSize().getHeightOrDefault(getMinHeight())), getSize().getHeightOrDefault(getMinHeight()) / 2);
+        int topPadding = Math.max(0, (getSize().getHeightOrDefault(getMinHeight()) - checkBoxSize) / 2);
         int checkGap = 3;
 
         // Get the color theme
